@@ -1,18 +1,21 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# Ignore environment variables
+.env
+.env.local
+.env.*.local
 
-# Other files and folders
-.settings/
+# Next.js build output
+.next/
+out/
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
+# Logs
+logs
+*.log
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Dependency folders
+node_modules/
+
+# System files
+.DS_Store
+
+# Ignore uploads (optional)
+uploads/
