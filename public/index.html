@@ -2,75 +2,181 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Damx Store Payment</title>
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #0e0e0e;
-      color: white;
+      background: #0f0f0f;
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .loading-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #0f0f0f;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loader {
+      border: 4px solid #2c2c2c;
+      border-top: 4px solid #00ffee;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    header, section {
+      padding: 60px 20px;
       text-align: center;
-      overflow: hidden;
+    }
+
+    header {
+      background: linear-gradient(145deg, #0f0f0f, #111111);
     }
 
     h1 {
       font-size: 2.5rem;
       margin-bottom: 10px;
-      animation: fadeInDown 1s ease-out;
     }
 
     p {
-      font-size: 1.2rem;
-      margin-bottom: 30px;
+      font-size: 1rem;
       color: #aaa;
-      animation: fadeInUp 1.5s ease-out;
+      margin-bottom: 20px;
     }
 
     .btn {
-      padding: 12px 30px;
       background: #00ffee;
-      border: none;
       color: #000;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 30px;
       font-weight: bold;
       font-size: 1rem;
-      border-radius: 30px;
       cursor: pointer;
-      transition: background 0.3s;
-      animation: fadeInUp 2s ease-out;
+      transition: background 0.3s ease;
     }
 
     .btn:hover {
-      background: #00e0cc;
+      background: #00ddcc;
     }
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .section-dark {
+      background-color: #121212;
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .section-light {
+      background-color: #1a1a1a;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      font-size: 1rem;
     }
 
     .credit {
-      position: absolute;
-      bottom: 10px;
+      text-align: center;
+      padding: 20px;
       font-size: 0.8rem;
-      color: #555;
+      color: #666;
+    }
+
+    #mainContent {
+      display: none;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Selamat Datang ke Damx Store 💸</h1>
-  <p>Sila klik butang di bawah untuk membuat pembayaran anda.</p>
-  <a href="payment.html"><button class="btn">Bayar Sekarang</button></a>
-  <div class="credit">From DAMX STORE</div>
+
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loader"></div>
+  </div>
+
+  <div id="mainContent">
+    <header>
+      <h1>Selamat Datang ke DAMX STORE 💸</h1>
+      <p>Pusat jualan script, panel & tool WhatsApp</p>
+      <a href="#bayar"><button class="btn">Mula Bayar</button></a>
+    </header>
+
+    <section class="section-dark">
+      <h2>Tentang Damx Store</h2>
+      <p>Kami menjual script WhatsApp crash, spam bot, panel Telegram dan pelbagai tool untuk pengguna lanjutan.</p>
+    </section>
+
+    <section class="section-light">
+      <h2>Senarai Produk</h2>
+      <ul>
+        <li>🔥 AMBA CRASH - RM7 / RM10</li>
+        <li>🚀 PSYCHO CRASH - RM10 / RM15</li>
+        <li>🐉 MAHJONG TELE - RM10 / RM20</li>
+        <li>👑 PANEL CREATOR - RM5 / RM15</li>
+      </ul>
+    </section>
+
+    <section class="section-dark">
+      <h2>Cara Pembayaran</h2>
+      <ul>
+        <li>1. Pilih produk anda</li>
+        <li>2. Tekan "Bayar Sekarang"</li>
+        <li>3. Upload resit / bukti bayar</li>
+        <li>4. Tunggu admin hantar produk anda</li>
+      </ul>
+    </section>
+
+    <section class="section-light" id="bayar">
+      <h2>Sedia untuk Bayar?</h2>
+      <p>Klik butang di bawah untuk terus ke halaman pembayaran.</p>
+      <a href="payment.html"><button class="btn">Bayar Sekarang</button></a>
+    </section>
+
+    <div class="credit">From DAMX STORE</div>
+  </div>
+
+  <script>
+    window.addEventListener("load", () => {
+      const loadingScreen = document.getElementById("loadingScreen");
+      const mainContent = document.getElementById("mainContent");
+
+      setTimeout(() => {
+        loadingScreen.style.opacity = "0";
+        setTimeout(() => {
+          loadingScreen.style.display = "none";
+          mainContent.style.display = "block";
+        }, 500);
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
