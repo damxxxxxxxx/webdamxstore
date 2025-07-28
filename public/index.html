@@ -3,222 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DAMX PROLIO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <title>DAMX STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html, body {
-      height: 100%;
-      background: radial-gradient(circle at center, #0e0e0e 0%, #050505 100%);
-      font-family: 'Inter', sans-serif;
-      overflow: hidden;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0d0d0d;
+      font-family: 'Orbitron', sans-serif;
       color: white;
+      overflow: hidden;
     }
 
-    .center-screen {
+    .loading-screen {
       position: fixed;
       width: 100%;
       height: 100%;
+      background: #000;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      transition: all 0.8s ease-in-out;
+      z-index: 9999;
     }
 
-    .intro-screen {
-      z-index: 2;
-      animation: fadeIn 2s ease forwards;
+    .fall-text {
+      font-size: 48px;
+      opacity: 0;
+      animation: dropText 2s ease forwards;
     }
 
-    .logo-circle {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: url('https://files.catbox.moe/b5pfw2.jpg') no-repeat center center;
-      background-size: cover;
-      box-shadow: 0 0 25px rgba(0, 255, 200, 0.3);
-      margin-bottom: 1.5rem;
-      animation: popIn 1.5s ease;
-    }
-
-    .intro-screen h1 {
-      font-size: 30px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      text-shadow: 0 0 10px #00ffd5;
-      animation: fadeInUp 2s ease;
+    @keyframes dropText {
+      0% { transform: translateY(-200px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
 
     .start-btn {
       margin-top: 2rem;
-      padding: 0.8rem 2.5rem;
-      font-size: 16px;
-      font-weight: 600;
-      background: linear-gradient(135deg, #ffffff30, #00ffc360);
-      color: #fff;
-      border: 2px solid #00ffc3;
-      border-radius: 30px;
-      box-shadow: inset 0 0 8px rgba(255,255,255,0.2), 0 0 10px rgba(0,255,195,0.3);
-      backdrop-filter: blur(8px);
+      padding: 1rem 2rem;
+      font-size: 22px;
+      background: linear-gradient(145deg, #e1e1e1, #ffffff);
+      color: #000;
+      border: none;
+      border-radius: 40px;
       cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: 0.3s;
-      animation: pulse 2s infinite;
+      box-shadow: 0 0 15px rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+      font-weight: bold;
     }
 
     .start-btn:hover {
-      box-shadow: 0 0 25px rgba(0,255,195,0.6);
-    }
-
-    .start-btn::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.5), transparent);
-      transform: skewX(-20deg);
-      transition: 0.5s;
-    }
-
-    .start-btn:hover::before {
-      left: 120%;
-    }
-
-    /* Animated transition screen */
-    .store-screen {
-      display: none;
-      text-align: center;
-      z-index: 1;
-      padding: 2rem;
-      animation: fadeInMain 1s ease;
-    }
-
-    .store-logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: url('https://files.catbox.moe/b5pfw2.jpg') no-repeat center center;
-      background-size: cover;
-      animation: zoomIn 1s ease forwards;
-      margin-bottom: 1rem;
-    }
-
-    .store-title {
-      font-size: 28px;
-      font-weight: bold;
-      color: #00ffc3;
-      text-shadow: 0 0 10px #00ffc3;
-    }
-
-    .tagline {
-      font-size: 14px;
-      color: #ccc;
-      margin-top: 0.5rem;
-    }
-
-    .buttons {
-      margin-top: 2rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .buttons a {
-      padding: 0.6rem 1.4rem;
-      border-radius: 30px;
-      font-weight: 600;
-      text-decoration: none;
-      background: linear-gradient(135deg, #00ffc3, #00b89d);
-      color: #000;
-      box-shadow: 0 0 12px rgba(0,255,195,0.3);
-      transition: transform 0.2s;
-    }
-
-    .buttons a:hover {
       transform: scale(1.05);
-      animation: shake 0.4s ease;
     }
 
-    /* Animations */
+    .main-page {
+      display: none;
+      height: 100vh;
+      text-align: center;
+      padding: 3rem 1rem;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes popIn {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    .logo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
     }
 
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(30px); }
-      100% { opacity: 1; transform: translateY(0); }
+    .main-title {
+      font-size: 36px;
+      margin-top: 1rem;
+      letter-spacing: 2px;
     }
 
-    @keyframes fadeInMain {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+    .subtitle {
+      font-size: 14px;
+      color: #aaa;
+      margin: 1rem 0 2rem;
+      animation: slideleft 6s linear infinite;
     }
 
-    @keyframes zoomIn {
-      from { transform: scale(0); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+    @keyframes slideleft {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 10px #00ffc3; }
-      50% { transform: scale(1.05); box-shadow: 0 0 20px #00ffc3; }
-      100% { transform: scale(1); box-shadow: 0 0 10px #00ffc3; }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 1rem 2rem;
+      font-size: 18px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      background: linear-gradient(145deg, #fff, #ccc);
+      color: #000;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover {
+      animation: shake 0.5s;
     }
 
     @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-4px); }
-      50% { transform: translateX(4px); }
-      75% { transform: translateX(-2px); }
-      100% { transform: translateX(0); }
-    }
-
-    @media (max-width: 500px) {
-      .store-title { font-size: 22px; }
-      .intro-screen h1 { font-size: 24px; }
+      0% { transform: translateX(0px); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-3px); }
+      100% { transform: translateX(0px); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Intro Screen -->
-  <div class="center-screen intro-screen" id="intro">
-    <div class="logo-circle"></div>
-    <h1>DAMX PROLIO</h1>
-    <button class="start-btn" onclick="showStore()">MULAKAN</button>
+  <!-- Loading Page -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="fall-text">DAMX STORE</div>
+    <button class="start-btn" onclick="startPage()">MULAKAN</button>
   </div>
 
-  <!-- Store Content -->
-  <div class="center-screen store-screen" id="store">
-    <div class="store-logo"></div>
-    <div class="store-title">DAMX STORE</div>
-    <div class="tagline">🚀 Fast. Trusted. Affordable. 🚀</div>
-    <div class="buttons">
-      <a href="https://wa.me/60123456789" target="_blank">WhatsApp</a>
-      <a href="https://t.me/DamxStoreOfficial" target="_blank">Telegram</a>
+  <!-- Main Page -->
+  <div class="main-page" id="mainPage">
+    <img src="https://files.catbox.moe/b5pfw2.jpg" alt="DAMX Logo" class="logo" />
+    <h1 class="main-title">DAMX STORE</h1>
+    <div class="subtitle">Teruskan berjuang. Kejayaan milik mereka yang konsisten 💪</div>
+
+    <div class="btn-group">
+      <a href="https://wa.me/60123456789" target="_blank">
+        <button class="action-btn">WhatsApp Business</button>
+      </a>
+      <a href="https://t.me/yourtelegramusername" target="_blank">
+        <button class="action-btn">Telegram</button>
+      </a>
     </div>
   </div>
 
   <script>
-    function showStore() {
-      document.getElementById("intro").style.display = "none";
-      document.getElementById("store").style.display = "flex";
+    function startPage() {
+      document.getElementById('loadingScreen').style.display = 'none';
+      document.getElementById('mainPage').style.display = 'block';
     }
   </script>
 
