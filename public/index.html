@@ -1082,11 +1082,11 @@
       </div>
     </div>
 
-    <div class="qris-section">
-      <h3><i class="fas fa-qrcode"></i> Universal QRIS Payment</h3>
-      <img src="https://files.catbox.moe/uye5pn.jpg" alt="QRIS Code" class="qris-code" id="qrisImage" />
+    <div class="tng-section">
+      <h3><i class="fas fa-qrcode"></i> Universal TnG Payment</h3>
+      <img src="https://files.catbox.moe/dpqpc8.jpg" alt="TnG Code" class="tng-code" id="tngImage" />
       <p style="color: var(--text-secondary); margin-top: 1rem;">
-        Scan this QR code with any Indonesian e-wallet app for instant payment
+        Scan this QR code with any Malaysia e-wallet app for instant payment
       </p>
       <button class="download-btn" onclick="downloadQRIS()">
         <i class="fas fa-download"></i> Download QRIS
@@ -1107,7 +1107,7 @@
     const audio = document.getElementById('audio');
     const themeIcon = document.getElementById('themeIcon');
 
-    const texts = ["Hello, I'm Relzz.", "Web Developer. Code Dreamer.", "From idea to launch.", "Click - Type - Create.", "Welcome to my world."];
+    const texts = ["Hello, I'm Damz.", "Web Developer. Code Dreamer.", "From idea to launch.", "Click - Type - Create.", "Welcome to my world."];
     
     function typeText(el, words) {
       let index = 0, char = 0, isComplete = false;
@@ -1192,11 +1192,11 @@
         ctx.drawImage(img, 0, 0);
         
         const link = document.createElement('a');
-        link.download = 'Relzz-QRIS-Payment.png';
+        link.download = 'https://files.catbox.moe/dpqpc8.jpg';
         link.href = canvas.toDataURL();
         link.click();
         
-        showNotification(`<i class="fas fa-download"></i> QRIS downloaded successfully!`);
+        showNotification(`<i class="fas fa-download"></i> TnG downloaded successfully!`);
       };
       
       img.src = qrisImage.src;
