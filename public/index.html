@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DAMX STORE</title>
+  <title>DAMX PROLIO</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     * {
@@ -12,12 +12,12 @@
       box-sizing: border-box;
     }
 
-    body, html {
+    html, body {
       height: 100%;
-      background: #0d0d0d;
+      background: radial-gradient(circle at center, #0e0e0e 0%, #050505 100%);
       font-family: 'Inter', sans-serif;
-      color: white;
       overflow: hidden;
+      color: white;
     }
 
     .center-screen {
@@ -25,71 +25,104 @@
       width: 100%;
       height: 100%;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       flex-direction: column;
       transition: all 0.8s ease-in-out;
     }
 
     .intro-screen {
       z-index: 2;
-      animation: fadeInIntro 2s ease forwards;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .logo-circle {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: url('https://files.catbox.moe/b5pfw2.jpg') no-repeat center center;
+      background-size: cover;
+      box-shadow: 0 0 25px rgba(0, 255, 200, 0.3);
+      margin-bottom: 1.5rem;
+      animation: popIn 1.5s ease;
     }
 
     .intro-screen h1 {
-      font-size: 32px;
-      font-weight: 700;
-      animation: slideUp 1.5s ease;
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 0 0 10px #00ffd5;
+      animation: fadeInUp 2s ease;
     }
 
-    .intro-screen button {
+    .start-btn {
       margin-top: 2rem;
-      padding: 0.8rem 2rem;
-      background: #00ffc3;
-      color: #000;
-      font-weight: 700;
+      padding: 0.8rem 2.5rem;
       font-size: 16px;
-      border: none;
-      border-radius: 10px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #ffffff30, #00ffc360);
+      color: #fff;
+      border: 2px solid #00ffc3;
+      border-radius: 30px;
+      box-shadow: inset 0 0 8px rgba(255,255,255,0.2), 0 0 10px rgba(0,255,195,0.3);
+      backdrop-filter: blur(8px);
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
       transition: 0.3s;
-      box-shadow: 0 0 12px rgba(0,255,195,0.3);
+      animation: pulse 2s infinite;
     }
 
-    .intro-screen button:hover {
-      background: #00c49c;
-      box-shadow: 0 0 20px rgba(0,255,195,0.6);
+    .start-btn:hover {
+      box-shadow: 0 0 25px rgba(0,255,195,0.6);
     }
 
-    /* Screen selepas tekan MULAKAN */
+    .start-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.5), transparent);
+      transform: skewX(-20deg);
+      transition: 0.5s;
+    }
+
+    .start-btn:hover::before {
+      left: 120%;
+    }
+
+    /* Animated transition screen */
     .store-screen {
       display: none;
-      z-index: 1;
       text-align: center;
+      z-index: 1;
       padding: 2rem;
       animation: fadeInMain 1s ease;
     }
 
-    .logo {
+    .store-logo {
       width: 120px;
       height: 120px;
-      background: url('https://files.catbox.moe/f6wehj.png') no-repeat center center;
-      background-size: contain;
+      border-radius: 50%;
+      background: url('https://files.catbox.moe/b5pfw2.jpg') no-repeat center center;
+      background-size: cover;
       animation: zoomIn 1s ease forwards;
       margin-bottom: 1rem;
     }
 
-    .store-name {
-      font-size: 30px;
+    .store-title {
+      font-size: 28px;
       font-weight: bold;
-      animation: fadeInText 1.2s ease forwards;
+      color: #00ffc3;
+      text-shadow: 0 0 10px #00ffc3;
     }
 
     .tagline {
       font-size: 14px;
       color: #ccc;
       margin-top: 0.5rem;
-      animation: fadeInText 1.5s ease forwards;
     }
 
     .buttons {
@@ -101,41 +134,40 @@
     }
 
     .buttons a {
-      padding: 0.7rem 1.6rem;
-      background: #00ffc3;
-      color: #000;
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
       font-weight: 600;
-      border-radius: 8px;
       text-decoration: none;
-      box-shadow: 0 0 12px rgba(0,255,195,0.2);
-      transition: 0.3s;
+      background: linear-gradient(135deg, #00ffc3, #00b89d);
+      color: #000;
+      box-shadow: 0 0 12px rgba(0,255,195,0.3);
+      transition: transform 0.2s;
     }
 
     .buttons a:hover {
-      background: #00c9a1;
-      box-shadow: 0 0 18px rgba(0,255,195,0.5);
+      transform: scale(1.05);
       animation: shake 0.4s ease;
     }
 
-    /* ANIMATIONS */
-    @keyframes fadeInIntro {
-      from { opacity: 0 }
-      to { opacity: 1 }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0 }
-      to { transform: translateY(0); opacity: 1 }
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeInMain {
-      from { opacity: 0; transform: scale(0.95) }
-      to { opacity: 1; transform: scale(1) }
-    }
-
-    @keyframes fadeInText {
-      from { opacity: 0 }
-      to { opacity: 1 }
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
     @keyframes zoomIn {
@@ -143,40 +175,42 @@
       to { transform: scale(1); opacity: 1; }
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 10px #00ffc3; }
+      50% { transform: scale(1.05); box-shadow: 0 0 20px #00ffc3; }
+      100% { transform: scale(1); box-shadow: 0 0 10px #00ffc3; }
+    }
+
     @keyframes shake {
       0% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-3px); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-2px); }
       100% { transform: translateX(0); }
     }
 
     @media (max-width: 500px) {
-      .store-name {
-        font-size: 24px;
-      }
-
-      .intro-screen h1 {
-        font-size: 24px;
-      }
+      .store-title { font-size: 22px; }
+      .intro-screen h1 { font-size: 24px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Intro -->
+  <!-- Intro Screen -->
   <div class="center-screen intro-screen" id="intro">
-    <h1>WELCOME TO DAMX PROLIO</h1>
-    <button onclick="showStore()">MULAKAN</button>
+    <div class="logo-circle"></div>
+    <h1>DAMX PROLIO</h1>
+    <button class="start-btn" onclick="showStore()">MULAKAN</button>
   </div>
 
-  <!-- Store content -->
+  <!-- Store Content -->
   <div class="center-screen store-screen" id="store">
-    <div class="logo"></div>
-    <div class="store-name">DAMX STORE</div>
-    <div class="tagline">💫 Servis Terbaik, Harga Berbaloi 💫</div>
+    <div class="store-logo"></div>
+    <div class="store-title">DAMX STORE</div>
+    <div class="tagline">🚀 Fast. Trusted. Affordable. 🚀</div>
     <div class="buttons">
-      <a href="https://wa.me/60123456789" target="_blank">WhatsApp Business</a>
+      <a href="https://wa.me/60123456789" target="_blank">WhatsApp</a>
       <a href="https://t.me/DamxStoreOfficial" target="_blank">Telegram</a>
     </div>
   </div>
