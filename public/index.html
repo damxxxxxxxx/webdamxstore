@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ms">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Damx Prolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <title>Selamat Datang - DAMX STORE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     * {
       margin: 0;
@@ -12,110 +12,242 @@
       box-sizing: border-box;
     }
 
-    body {
-      background-color: #0e0e0e;
-      color: #fff;
+    body, html {
+      height: 100%;
+      background: #0d0d0d;
       font-family: 'Inter', sans-serif;
+      color: white;
       overflow: hidden;
     }
 
-    .loader-screen {
-      position: fixed;
+    .intro-screen, .loading-screen, .main-content {
+      position: absolute;
       width: 100%;
       height: 100%;
-      background: #0e0e0e;
       display: flex;
-      justify-content: center;
       align-items: center;
-      z-index: 9999;
+      justify-content: center;
       flex-direction: column;
-      animation: fadeOut 2s ease-in-out forwards;
-      animation-delay: 3s;
+      transition: all 0.8s ease-in-out;
     }
 
-    .loader-text {
-      font-size: 24px;
-      font-weight: 600;
-      color: #ffffff;
-      animation: typing 2s steps(20), blink 0.5s step-end infinite alternate;
+    /* ------------------ INTRO ------------------- */
+    .intro-screen {
+      background: radial-gradient(circle at center, #111 0%, #0d0d0d 100%);
+      z-index: 3;
+      animation: fadeInIntro 2s ease forwards;
     }
 
-    .main-content {
-      display: none;
-      text-align: center;
-      padding: 2rem;
+    .intro-screen h1 {
+      font-size: 32px;
+      font-weight: 700;
+      animation: slideUp 1.5s ease;
     }
 
-    .main-content.show {
-      display: block;
-      animation: fadeIn 1.5s ease;
+    .intro-screen button {
+      margin-top: 2rem;
+      padding: 0.8rem 2rem;
+      background: #00ffc3;
+      color: #000;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(0,255,195,0.3);
     }
 
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
+    .intro-screen button:hover {
+      background: #00c49c;
+      box-shadow: 0 0 20px rgba(0,255,195,0.6);
     }
 
-    @keyframes fadeIn {
+    @keyframes fadeInIntro {
+      from { opacity: 0 }
+      to { opacity: 1 }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0 }
+      to { transform: translateY(0); opacity: 1 }
+    }
+
+    /* ------------------ LOADING ------------------- */
+    .loading-screen {
+      background: #0d0d0d;
+      z-index: 2;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loading-screen.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      background: url('https://files.catbox.moe/f6wehj.png') no-repeat center center;
+      background-size: contain;
+      animation: zoomIn 1.2s ease forwards;
+    }
+
+    .store-name {
+      font-size: 30px;
+      font-weight: bold;
+      margin-top: 1.2rem;
+      opacity: 0;
+      animation: fadeInText 1.5s ease forwards;
+      animation-delay: 1s;
+    }
+
+    .tagline {
+      font-size: 14px;
+      margin-top: 0.8rem;
+      color: #bbbbbb;
+      opacity: 0;
+      animation: fadeInText 2s ease forwards;
+      animation-delay: 2s;
+    }
+
+    .tagline-moving {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #00ffc3;
+      width: 280px;
+      margin-top: 1.5rem;
+      font-size: 13px;
+      color: #00ffc3;
+      animation: typing 5s steps(40) infinite;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeInText {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
     @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+      0% { width: 0 }
+      50% { width: 280px }
+      100% { width: 0 }
     }
 
-    @keyframes blink {
-      50% { border-color: transparent }
-    }
-
-    .loader-text::after {
-      content: "|";
-      animation: blink 1s infinite;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #1a1a1a;
+    /* ------------------ MAIN CONTENT ------------------- */
+    .main-content {
+      background: linear-gradient(to bottom, #101010, #070707);
+      display: none;
+      text-align: center;
+      z-index: 1;
       padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(255,255,255,0.05);
     }
 
-    .title {
-      font-size: 28px;
-      font-weight: bold;
-      margin-bottom: 1rem;
+    .main-content.show {
+      display: flex;
+      animation: fadeInMain 1.5s ease;
     }
 
-    .desc {
-      font-size: 16px;
+    @keyframes fadeInMain {
+      from { opacity: 0 }
+      to { opacity: 1 }
+    }
+
+    .main-content h2 {
+      font-size: 26px;
+      margin-bottom: 0.5rem;
+    }
+
+    .main-content p {
       color: #ccc;
+      font-size: 15px;
+      margin-bottom: 2rem;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .button-group a {
+      padding: 0.7rem 1.6rem;
+      border-radius: 8px;
+      background: #00ffc3;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(0,255,195,0.2);
+      transition: 0.3s;
+    }
+
+    .button-group a:hover {
+      background: #00c9a1;
+      box-shadow: 0 0 18px rgba(0,255,195,0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .intro-screen h1, .store-name {
+        font-size: 22px;
+      }
+      .main-content h2 {
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="loader-screen">
-    <div class="loader-text">WELCOME TO DAMX PROLIO</div>
+  <!-- Intro -->
+  <div class="intro-screen" id="intro">
+    <h1>WELCOME TO DAMX PROLIO</h1>
+    <button onclick="startLoading()">MULAKAN</button>
   </div>
 
+  <!-- Loading -->
+  <div class="loading-screen" id="loading">
+    <div class="logo"></div>
+    <div class="store-name">DAMX STORE</div>
+    <div class="tagline">Terima kasih kerana menyokong kami ❤️</div>
+    <div class="tagline-moving">🔥 Servis pantas. Harga mampu milik. Kepuasan dijamin. 🔥</div>
+  </div>
+
+  <!-- Main content -->
   <div class="main-content" id="mainContent">
-    <div class="container">
-      <div class="title">DAMX PROLIO</div>
-      <div class="desc">Terima kasih kerana melawat. Sila pilih servis atau panel anda di atas.</div>
+    <h2>Selamat datang ke DAMX STORE</h2>
+    <p>Sila pilih platform untuk berhubung:</p>
+    <div class="button-group">
+      <a href="https://wa.me/60123456789" target="_blank">WhatsApp Business</a>
+      <a href="https://t.me/DamxStoreOfficial" target="_blank">Telegram</a>
     </div>
   </div>
 
   <script>
-    setTimeout(() => {
-      document.querySelector('.loader-screen').style.display = 'none';
-      document.getElementById('mainContent').classList.add('show');
-    }, 3000);
+    function startLoading() {
+      // Hide intro
+      document.getElementById("intro").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("intro").style.display = "none";
+
+        // Show loading screen
+        const loading = document.getElementById("loading");
+        loading.classList.add("show");
+
+        // After 5s show main
+        setTimeout(() => {
+          loading.style.display = "none";
+          document.getElementById("mainContent").classList.add("show");
+        }, 5000);
+      }, 800);
+    }
   </script>
+
 </body>
 </html>
