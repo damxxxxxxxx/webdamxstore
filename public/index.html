@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Selamat Datang - DAMX STORE</title>
+  <title>DAMX STORE</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     * {
@@ -20,8 +20,8 @@
       overflow: hidden;
     }
 
-    .intro-screen, .loading-screen, .main-content {
-      position: absolute;
+    .center-screen {
+      position: fixed;
       width: 100%;
       height: 100%;
       display: flex;
@@ -31,10 +31,8 @@
       transition: all 0.8s ease-in-out;
     }
 
-    /* ------------------ INTRO ------------------- */
     .intro-screen {
-      background: radial-gradient(circle at center, #111 0%, #0d0d0d 100%);
-      z-index: 3;
+      z-index: 2;
       animation: fadeInIntro 2s ease forwards;
     }
 
@@ -63,6 +61,63 @@
       box-shadow: 0 0 20px rgba(0,255,195,0.6);
     }
 
+    /* Screen selepas tekan MULAKAN */
+    .store-screen {
+      display: none;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+      animation: fadeInMain 1s ease;
+    }
+
+    .logo {
+      width: 120px;
+      height: 120px;
+      background: url('https://files.catbox.moe/f6wehj.png') no-repeat center center;
+      background-size: contain;
+      animation: zoomIn 1s ease forwards;
+      margin-bottom: 1rem;
+    }
+
+    .store-name {
+      font-size: 30px;
+      font-weight: bold;
+      animation: fadeInText 1.2s ease forwards;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #ccc;
+      margin-top: 0.5rem;
+      animation: fadeInText 1.5s ease forwards;
+    }
+
+    .buttons {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .buttons a {
+      padding: 0.7rem 1.6rem;
+      background: #00ffc3;
+      color: #000;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 0 12px rgba(0,255,195,0.2);
+      transition: 0.3s;
+    }
+
+    .buttons a:hover {
+      background: #00c9a1;
+      box-shadow: 0 0 18px rgba(0,255,195,0.5);
+      animation: shake 0.4s ease;
+    }
+
+    /* ANIMATIONS */
     @keyframes fadeInIntro {
       from { opacity: 0 }
       to { opacity: 1 }
@@ -73,54 +128,14 @@
       to { transform: translateY(0); opacity: 1 }
     }
 
-    /* ------------------ LOADING ------------------- */
-    .loading-screen {
-      background: #0d0d0d;
-      z-index: 2;
-      opacity: 0;
-      visibility: hidden;
+    @keyframes fadeInMain {
+      from { opacity: 0; transform: scale(0.95) }
+      to { opacity: 1; transform: scale(1) }
     }
 
-    .loading-screen.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .logo {
-      width: 120px;
-      height: 120px;
-      background: url('https://files.catbox.moe/f6wehj.png') no-repeat center center;
-      background-size: contain;
-      animation: zoomIn 1.2s ease forwards;
-    }
-
-    .store-name {
-      font-size: 30px;
-      font-weight: bold;
-      margin-top: 1.2rem;
-      opacity: 0;
-      animation: fadeInText 1.5s ease forwards;
-      animation-delay: 1s;
-    }
-
-    .tagline {
-      font-size: 14px;
-      margin-top: 0.8rem;
-      color: #bbbbbb;
-      opacity: 0;
-      animation: fadeInText 2s ease forwards;
-      animation-delay: 2s;
-    }
-
-    .tagline-moving {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid #00ffc3;
-      width: 280px;
-      margin-top: 1.5rem;
-      font-size: 13px;
-      color: #00ffc3;
-      animation: typing 5s steps(40) infinite;
+    @keyframes fadeInText {
+      from { opacity: 0 }
+      to { opacity: 1 }
     }
 
     @keyframes zoomIn {
@@ -128,77 +143,21 @@
       to { transform: scale(1); opacity: 1; }
     }
 
-    @keyframes fadeInText {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-3px); }
+      100% { transform: translateX(0); }
     }
 
-    @keyframes typing {
-      0% { width: 0 }
-      50% { width: 280px }
-      100% { width: 0 }
-    }
-
-    /* ------------------ MAIN CONTENT ------------------- */
-    .main-content {
-      background: linear-gradient(to bottom, #101010, #070707);
-      display: none;
-      text-align: center;
-      z-index: 1;
-      padding: 2rem;
-    }
-
-    .main-content.show {
-      display: flex;
-      animation: fadeInMain 1.5s ease;
-    }
-
-    @keyframes fadeInMain {
-      from { opacity: 0 }
-      to { opacity: 1 }
-    }
-
-    .main-content h2 {
-      font-size: 26px;
-      margin-bottom: 0.5rem;
-    }
-
-    .main-content p {
-      color: #ccc;
-      font-size: 15px;
-      margin-bottom: 2rem;
-    }
-
-    .button-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .button-group a {
-      padding: 0.7rem 1.6rem;
-      border-radius: 8px;
-      background: #00ffc3;
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 0 12px rgba(0,255,195,0.2);
-      transition: 0.3s;
-    }
-
-    .button-group a:hover {
-      background: #00c9a1;
-      box-shadow: 0 0 18px rgba(0,255,195,0.5);
-    }
-
-    /* Responsive */
     @media (max-width: 500px) {
-      .intro-screen h1, .store-name {
-        font-size: 22px;
+      .store-name {
+        font-size: 24px;
       }
-      .main-content h2 {
-        font-size: 20px;
+
+      .intro-screen h1 {
+        font-size: 24px;
       }
     }
   </style>
@@ -206,46 +165,26 @@
 <body>
 
   <!-- Intro -->
-  <div class="intro-screen" id="intro">
+  <div class="center-screen intro-screen" id="intro">
     <h1>WELCOME TO DAMX PROLIO</h1>
-    <button onclick="startLoading()">MULAKAN</button>
+    <button onclick="showStore()">MULAKAN</button>
   </div>
 
-  <!-- Loading -->
-  <div class="loading-screen" id="loading">
+  <!-- Store content -->
+  <div class="center-screen store-screen" id="store">
     <div class="logo"></div>
     <div class="store-name">DAMX STORE</div>
-    <div class="tagline">Terima kasih kerana menyokong kami ❤️</div>
-    <div class="tagline-moving">🔥 Servis pantas. Harga mampu milik. Kepuasan dijamin. 🔥</div>
-  </div>
-
-  <!-- Main content -->
-  <div class="main-content" id="mainContent">
-    <h2>Selamat datang ke DAMX STORE</h2>
-    <p>Sila pilih platform untuk berhubung:</p>
-    <div class="button-group">
+    <div class="tagline">💫 Servis Terbaik, Harga Berbaloi 💫</div>
+    <div class="buttons">
       <a href="https://wa.me/60123456789" target="_blank">WhatsApp Business</a>
       <a href="https://t.me/DamxStoreOfficial" target="_blank">Telegram</a>
     </div>
   </div>
 
   <script>
-    function startLoading() {
-      // Hide intro
-      document.getElementById("intro").style.opacity = "0";
-      setTimeout(() => {
-        document.getElementById("intro").style.display = "none";
-
-        // Show loading screen
-        const loading = document.getElementById("loading");
-        loading.classList.add("show");
-
-        // After 5s show main
-        setTimeout(() => {
-          loading.style.display = "none";
-          document.getElementById("mainContent").classList.add("show");
-        }, 5000);
-      }, 800);
+    function showStore() {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById("store").style.display = "flex";
     }
   </script>
 
