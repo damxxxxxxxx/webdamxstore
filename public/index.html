@@ -1179,13 +1179,29 @@
       });
     }
 
-    function downloadDirect() {
-  const link = document.createElement('a');
-  link.href = 'https://files.catbox.moe/dpqpc8.jpg';
-  link.download = 'tng-image.jpg';
-  link.click();
+      <h1>💳 FUNT - Bayar Guna TnG</h1>
+  <p>Sila imbas QR di bawah untuk buat pembayaran</p>
+
+  <div class="tng-container">
+    <img id="tngImage" src="https://files.catbox.moe/dpqpc8.jpg" alt="TnG QR Code" />
+    <br />
+    <button onclick="downloadTngImage()">📥 Muat Turun QR TnG</button>
+    <div class="notif" id="notif">✅ Gambar TnG berjaya dimuat turun!</div>
+  </div>
+
+  <div class="credit">From DAMX STORE</div>
+
+  <script>
+    function downloadTngImage() {
+      const link = document.createElement('a');
+      link.href = 'https://files.catbox.moe/dpqpc8.jpg';
+      link.download = 'tng-image.jpg';
+      link.click();
+
+      const notif = document.getElementById('notif');
+      notif.style.display = 'block';
+      setTimeout(() => notif.style.display = 'none', 3000);
     }
-        showNotification(`<i class="fas fa-download"></i> TnG downloaded successfully!`);
       };
       
       img.src = tngImage.src;
